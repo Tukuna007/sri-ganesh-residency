@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export const metadata = constructMetadata({
   title: 'Gallery',
-  description: 'Visual journey through Shri Ganesh Residency. Explore our luxurious rooms, elegant lobby, and modern interiors.',
+  description: 'Visual journey through Sri Ganesh Residency. Explore our luxurious rooms, elegant lobby, and modern interiors.',
 })
 
 import Breadcrumbs from '@/components/breadcrumb'
@@ -42,7 +42,7 @@ export default function GalleryPage() {
             </h1>
             <div className="w-24 h-1 bg-primary/40 mx-auto mb-10 rounded-full animate-fade-in [animation-delay:700ms]" />
             <p className="text-xl text-white max-w-3xl mx-auto font-light leading-relaxed animate-fade-in [animation-delay:800ms] gpu-accel drop-shadow-md">
-              Experience the comfort and elegance of Shri Ganesh Residency through our curated visual storytelling. Explore our modern sanctuaries and architectural precision.
+              Experience the comfort and elegance of Sri Ganesh Residency through our curated visual storytelling. Explore our modern sanctuaries and architectural precision.
             </p>
           </div>
           <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-background to-transparent" />

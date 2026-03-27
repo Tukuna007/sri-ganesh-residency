@@ -10,7 +10,7 @@ export default function HeroSection({ dictionary }: { dictionary: any }) {
       <div className="absolute inset-0 z-0 scale-105 transition-transform duration-[3000ms] hover:scale-100 ease-out gpu-accel">
         <Image
           src="/hero.jpg"
-          alt="Shri Ganesh Residency Luxury Facade"
+          alt="Sri Ganesh Residency Luxury Facade"
           fill
           priority
           className="object-cover"
@@ -48,13 +48,11 @@ export default function HeroSection({ dictionary }: { dictionary: any }) {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-8 sm:gap-24 mt-24 pt-20 border-t border-white/20 animate-fade-in [animation-delay:800ms] gpu-accel">
+        <div className="flex justify-center mt-24 pt-20 border-t border-white/20 animate-fade-in [animation-delay:800ms] gpu-accel">
           {[
-            { label: dictionary.common.room_types, value: '4' },
-            { label: dictionary.common.total_rooms, value: '9' },
-            { label: dictionary.common.max_guests, value: '16' }
+            { label: dictionary.common.room_types, value: '4' }
           ].map((stat, idx) => (
-            <div key={idx} className="group">
+            <div key={idx} className="group text-center">
               <div className="text-4xl md:text-7xl font-serif font-bold text-primary mb-3 transition-transform group-hover:-translate-y-2 duration-500 gpu-accel drop-shadow-md">{stat.value}</div>
               <p className="text-[10px] md:text-[11px] text-white font-bold uppercase tracking-[0.4em] drop-shadow-lg">{stat.label}</p>
             </div>

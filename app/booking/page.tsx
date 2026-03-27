@@ -4,7 +4,7 @@ import BookingContent from '@/components/booking-content'
 
 export const metadata = constructMetadata({
   title: 'Book Your Stay',
-  description: 'Complete your booking at Shri Ganesh Residency. Experience luxury and comfort in just a few steps.',
+  description: 'Complete your booking at Sri Ganesh Residency. Experience luxury and comfort in just a few steps.',
   noIndex: true, // Usually booking pages should not be indexed if they are transactional
 })
 

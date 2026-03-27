@@ -22,7 +22,7 @@ export default function AdminPage() {
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-foreground mb-4 animate-fade-in [animation-delay:200ms]">
                 Dashboard <span className="text-primary italic">Overview</span>
             </h1>
-            <p className="text-lg text-foreground/50 font-light animate-fade-in [animation-delay:400ms]">Real-time analytics and room management for Shri Ganesh Residency.</p>
+            <p className="text-lg text-foreground/50 font-light animate-fade-in [animation-delay:400ms]">Real-time analytics and room management for Sri Ganesh Residency.</p>
           </div>
         </div>
 

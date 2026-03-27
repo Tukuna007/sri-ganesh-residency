@@ -68,7 +68,7 @@ export default function LocationSection() {
           {/* Map Embed */}
           <div className="lg:h-[750px] premium-card luxury-shadow hover:luxury-shadow-hover relative animate-fade-in [animation-delay:400ms] group transition-all duration-700 hover:-translate-y-2 gpu-accel border-none">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.109761563!2d79.4217!3d13.6288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4b123456789%3A0x1234567890abcdef!2sShri%20Ganesh%20Residency!5e0!3m2!1sen!2sin!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.109761563!2d79.4217!3d13.6288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4b123456789%3A0x1234567890abcdef!2sSri%20Ganesh%20Residency!5e0!3m2!1sen!2sin!4v1234567890"
               width="100%"
               height="100%"
               style={{ border: 0, filter: 'grayscale(0.1) contrast(1.1)' }}

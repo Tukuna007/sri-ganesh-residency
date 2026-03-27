@@ -2,11 +2,13 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import CurrencySelector from './currency-selector'
 import { cn } from '@/lib/utils'
+import { HOTEL_INFO } from '@/lib/constants'
 import {
   Sheet,
   SheetContent,
@@ -50,15 +52,21 @@ export default function MobileMenu({ navLinks = [], dictionary }: MobileMenuProp
       >
         <SheetHeader className="p-10 border-b border-white/5">
           <SheetTitle className="text-left">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <span className="text-white font-serif font-bold text-lg">SG</span>
+            <Link href="/" className="flex items-center gap-4 group" onClick={() => setIsOpen(false)}>
+              <div className="relative h-[48px] min-w-[48px] flex items-center">
+                <Image
+                  src="/logo.png"
+                  alt={HOTEL_INFO.name}
+                  width={130}
+                  height={48}
+                  className="h-[48px] w-auto object-contain object-left transition-all duration-300 group-hover:scale-105"
+                />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-serif font-bold text-white tracking-tight leading-none">THE RESIDENCY</span>
-                <span className="text-[8px] font-bold text-primary tracking-[0.3em] uppercase">Boutique Retreat</span>
+                <span className="text-xl font-serif font-black text-white tracking-tighter leading-none mb-1 uppercase italic">{HOTEL_INFO.name}</span>
+                <span className="text-[10px] font-black text-primary tracking-[0.4em] uppercase opacity-90 leading-none">{HOTEL_INFO.tagline}</span>
               </div>
-            </div>
+            </Link>
           </SheetTitle>
         </SheetHeader>
 

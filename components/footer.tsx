@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import { HOTEL_INFO } from '@/lib/constants'
 
@@ -16,11 +17,20 @@ export default function Footer({ dictionary }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           {/* Brand */}
           <div className="space-y-8">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <span className="text-white font-serif font-bold text-lg">SG</span>
+            <Link href="/" className="flex flex-col gap-4 group">
+              <div className="relative h-[70px] w-auto inline-flex items-center">
+                <Image
+                  src="/footer logo.png"
+                  alt={HOTEL_INFO.name}
+                  width={180}
+                  height={70}
+                  className="h-[70px] w-auto object-contain object-left"
+                />
               </div>
-              <span className="font-serif text-2xl font-bold tracking-tight uppercase italic">{HOTEL_INFO.name}</span>
+              <div className="flex flex-col">
+                <span className="font-serif text-3xl font-black tracking-tighter uppercase italic text-white leading-tight drop-shadow-sm">{HOTEL_INFO.name}</span>
+                <span className="text-[10px] font-black text-primary tracking-[0.4em] uppercase opacity-90 leading-none mt-1">{HOTEL_INFO.tagline}</span>
+              </div>
             </Link>
             <p className="text-sm text-background/80 font-light leading-relaxed max-w-xs">{HOTEL_INFO.description}</p>
           </div>

@@ -6,7 +6,7 @@ import { constructMetadata } from '@/lib/seo/metadata'
 
 export const metadata = constructMetadata({
   title: 'About Us',
-  description: 'Learn about the mission, values, and hospitality at Shri Ganesh Residency. Your home away from home with comfortable rooms and warm service.',
+  description: 'Learn about the mission, values, and hospitality at Sri Ganesh Residency. Your home away from home with comfortable rooms and warm service.',
 })
 
 
@@ -21,7 +21,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 z-0 scale-105 gpu-accel transition-transform duration-[3000ms] hover:scale-100 ease-out">
             <Image
               src="/exterior.jpeg"
-              alt="About Shri Ganesh Residency"
+              alt="About Sri Ganesh Residency"
               fill
               priority
               className="object-cover"

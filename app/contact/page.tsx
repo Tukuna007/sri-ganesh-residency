@@ -8,7 +8,7 @@ import Breadcrumbs from '@/components/breadcrumb'
 
 export const metadata = constructMetadata({
   title: 'Contact Us',
-  description: 'Get in touch with Shri Ganesh Residency. Reach out for booking inquiries, travel assistance, or general information about our accommodations.',
+  description: 'Get in touch with Sri Ganesh Residency. Reach out for booking inquiries, travel assistance, or general information about our accommodations.',
 })
 
 import { getDictionary } from '@/lib/i18n/get-dictionary'
@@ -24,7 +24,7 @@ export default async function ContactPage() {
           <div className="absolute inset-0 z-0 scale-105 gpu-accel transition-transform duration-[3000ms] hover:scale-100 ease-out">
             <Image
               src="/images/contact-luxury-hero.png"
-              alt="Contact Shri Ganesh Residency"
+              alt="Contact Sri Ganesh Residency"
               fill
               priority
               className="object-cover"
@@ -176,7 +176,7 @@ export default async function ContactPage() {
                 {/* Map Section */}
                 <div className="relative group rounded-[2rem] overflow-hidden border border-border/30 h-64 mb-10 gpu-accel">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.109761563!2d79.4217!3d13.6288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4b123456789%3A0x1234567890abcdef!2sShri%20Ganesh%20Residency!5e0!3m2!1sen!2sin!4v1711435200000"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.109761563!2d79.4217!3d13.6288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4b123456789%3A0x1234567890abcdef!2sSri%20Ganesh%20Residency!5e0!3m2!1sen!2sin!4v1711435200000"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

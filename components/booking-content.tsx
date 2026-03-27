@@ -342,11 +342,11 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
               </h2>
               <div className="h-px w-24 bg-primary/20 mx-auto mb-12" />
               <p className="text-xl text-foreground/50 max-w-xl mx-auto font-light leading-relaxed mb-16">
-                Thank you for choosing Shri Ganesh Residency. A confirmation of your upcoming stay has been dispatched to <span className="text-primary font-bold">{bookingData.email}</span>. We await your arrival with anticipation.
+                Thank you for choosing Sri Ganesh Residency. A confirmation of your upcoming stay has been dispatched to <span className="text-primary font-bold">{bookingData.email}</span>. We await your arrival with anticipation.
               </p>
-              <button asChild className="luxury-button bg-primary text-white hover:bg-black transition-all duration-700 px-16 h-18 text-xs font-bold uppercase tracking-[0.4em] rounded-[1.5rem]">
+              <Button asChild className="luxury-button bg-primary text-white hover:bg-black transition-all duration-700 px-16 h-18 text-xs font-bold uppercase tracking-[0.4em] rounded-[1.5rem]">
                 <Link href="/">Return to Grand Lobby</Link>
-              </button>
+              </Button>
             </div>
           )}
         </div>

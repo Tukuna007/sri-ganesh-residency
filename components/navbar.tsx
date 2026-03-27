@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import CurrencySelector from './currency-selector'
 import MobileMenu from './mobile-menu'
@@ -22,14 +23,20 @@ export default function Navbar({ dictionary }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4 group transition-transform active:scale-95">
-            <div className="relative w-12 h-12 rounded-2xl bg-primary flex items-center justify-center overflow-hidden shadow-lg shadow-primary/20">
-              <span className="text-white font-serif font-bold text-xl relative z-10 tracking-tighter">SG</span>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+          <Link href="/" className="flex items-center gap-4 group transition-all active:scale-95 py-2">
+            <div className="relative h-[48px] min-w-[48px] flex items-center">
+              <Image
+                src="/logo.png"
+                alt={HOTEL_INFO.name}
+                width={130}
+                height={48}
+                className="h-[48px] w-auto object-contain object-left transition-all duration-500 group-hover:scale-105"
+                priority
+              />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif font-bold text-xl tracking-tight text-foreground leading-none mb-1 uppercase italic">{HOTEL_INFO.name}</span>
-              <span className="text-[10px] font-bold text-primary tracking-[0.3em] uppercase opacity-70 leading-none">{HOTEL_INFO.tagline}</span>
+              <span className="font-serif font-black text-xl sm:text-2xl tracking-tighter text-foreground leading-[0.9] mb-1 uppercase italic drop-shadow-sm">{HOTEL_INFO.name}</span>
+              <span className="text-[9px] sm:text-[10px] font-black text-primary tracking-[0.4em] uppercase opacity-90 leading-none">{HOTEL_INFO.tagline}</span>
             </div>
           </Link>
 
@@ -52,7 +59,7 @@ export default function Navbar({ dictionary }: NavbarProps) {
             <div className="hidden md:block">
               <CurrencySelector />
             </div>
-            
+
             <Button asChild className="hidden sm:inline-flex luxury-button bg-primary hover:bg-primary/90 text-white px-8 py-4 h-auto text-[10px] rounded-full">
               <Link href="/booking">{dictionary.common.book_now}</Link>
             </Button>

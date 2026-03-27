@@ -9,7 +9,7 @@ export const ROOMS = [
     guests: 2,
     available: 3,
     description: 'Elegant and comfortable room perfect for couples and small groups',
-    amenities: ['Queen Bed', 'Modern Bathroom', 'Air Conditioning', 'Flat Screen TV', 'Free WiFi'],
+    amenities: ['King Size Bed', 'Modern Bathroom', 'Air Conditioning', 'Flat Screen TV', 'Free WiFi'],
     image: '/rooms/Deluxe/IMG-20251208-WA0018.jpg',
     images: ['/rooms/Deluxe/IMG-20251208-WA0018.jpg']
   },
@@ -21,8 +21,8 @@ export const ROOMS = [
     price: 2300,
     guests: 4,
     available: 4,
-    description: 'Spacious room with double beds ideal for families and groups of 4',
-    amenities: ['Double Beds', 'Sitting Area', 'Modern Bathroom', 'Premium Amenities', 'City View'],
+    description: 'Spacious room with 2 Queen Size Beds ideal for families and groups of 4',
+    amenities: ['2 Queen Size Beds', 'Sitting Area', 'Modern Bathroom', 'Premium Amenities', 'City View'],
     image: '/rooms/Double Deluxe/WhatsApp Image 2026-03-21 at 12.57.32.jpeg',
     video: '/rooms/Double Deluxe/WhatsApp Video 2026-03-21 at 12.57.32.mp4',
     images: [
@@ -128,9 +128,9 @@ export const GUEST_CAPACITY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16]
 
 // Hotel info
 export const HOTEL_INFO = {
-  name: 'Shri Ganesh Residency',
+  name: 'Sri Ganesh Residency',
   tagline: 'Comfort & Hospitality',
-  description: 'Experience comfortable and welcoming hospitality at Shri Ganesh Residency, your home away from home.',
+  description: 'Experience comfortable and welcoming hospitality at Sri Ganesh Residency, your home away from home.',
   phone: '+91 917 189 9992',
   landline: '+91 877 222 9969',
   email: 'sriganeshresidencytpt@gmail.com',

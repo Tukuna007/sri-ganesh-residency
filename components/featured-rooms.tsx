@@ -1,11 +1,15 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { ROOMS } from '@/lib/constants'
 import RoomCard from './room-card'
 
-export default function FeaturedRooms({ dictionary }: { dictionary: any }) {
-  const FEATURED_ROOMS = ROOMS.slice(0, 3)
+interface FeaturedRoomsProps {
+  dictionary: any
+  rooms: any[]
+}
+
+export default function FeaturedRooms({ dictionary, rooms }: FeaturedRoomsProps) {
+  const FEATURED_ROOMS = rooms.slice(0, 3)
 
   return (
     <section className="py-32 bg-background overflow-hidden">
@@ -45,4 +49,3 @@ export default function FeaturedRooms({ dictionary }: { dictionary: any }) {
     </section>
   )
 }
-

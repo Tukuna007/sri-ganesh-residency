@@ -7,6 +7,14 @@ import { CheckCircle2, Users, Calendar, CreditCard } from 'lucide-react'
 import { ROOMS } from '@/lib/constants'
 import { formatPrice, type Currency, DEFAULT_CURRENCY } from '@/lib/currency'
 import Link from 'next/link'
+import { toast } from 'sonner'
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
 
 export default function BookingContent({ dictionary }: { dictionary: any }) {
   const searchParams = useSearchParams()
@@ -76,11 +84,105 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
     }
   }
 
-  const handleCompleteBooking = () => {
-    if (validateStep(3)) {
-      setStep(4)
+  const handlePayment = async (bookingId: string) => {
+    try {
+      // 1. Create Razorpay Order
+      const orderRes = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingId }),
+      })
+      const orderData = await orderRes.json()
+
+      if (orderData.error) throw new Error(orderData.error)
+
+      // 2. Open Razorpay Checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: 'Sri Ganesh Residency',
+        description: `Booking for ${selectedRoom?.name}`,
+        order_id: orderData.order_id,
+        handler: async (response: any) => {
+          try {
+            // 3. Verify Payment
+            const verifyRes = await fetch('/api/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                ...response,
+                bookingId,
+              }),
+            })
+            const verifyData = await verifyRes.json()
+
+            if (verifyData.success) {
+              setStep(4)
+              toast.success('Payment successful!')
+            } else {
+              toast.error('Payment verification failed.')
+            }
+          } catch (err) {
+            console.error('Verification error:', err)
+            toast.error('Something went wrong during verification.')
+          }
+        },
+        prefill: {
+          name: `${bookingData.firstName} ${bookingData.lastName}`,
+          email: bookingData.email,
+          contact: bookingData.phone,
+        },
+        theme: { color: '#B8860B' }, // Primary color
+        modal: {
+          ondismiss: () => {
+            toast.error('Payment cancelled by user.')
+          }
+        }
+      }
+
+      const rzp = new window.Razorpay(options)
+      rzp.open()
+    } catch (error: any) {
+      console.error('Payment Error:', error)
+      toast.error(error.message || 'Could not initiate payment.')
     }
   }
+
+  const handleCompleteBooking = async () => {
+    if (validateStep(3)) {
+      try {
+        // 1. Create Booking in DB
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: `${bookingData.firstName} ${bookingData.lastName}`,
+            email: bookingData.email,
+            phone: bookingData.phone,
+            roomName: selectedRoom?.name,
+            roomId: selectedRoom?.id,
+            checkIn: bookingData.checkIn,
+            checkOut: bookingData.checkOut,
+            guests: bookingData.guests,
+            amount: selectedRoom?.price || 0,
+          }),
+        })
+        const data = await res.json()
+
+        if (data.success) {
+          // 2. Trigger Razorpay
+          await handlePayment(data.bookingId)
+        } else {
+          toast.error(data.error || 'Failed to create booking.')
+        }
+      } catch (err) {
+        console.error('Booking error:', err)
+        toast.error('Something went wrong.')
+      }
+    }
+  }
+
 
   if (!mounted) return <div className="min-h-screen flex items-center justify-center">Loading...</div>
 

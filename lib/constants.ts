@@ -6,7 +6,8 @@ export const ROOMS = [
     name: 'Deluxe',
     category: 'Deluxe',
     price: 1900,
-    guests: 2,
+    originalPrice: 2500,
+    guests: 3,
     available: 3,
     total: 3,
     description: 'Elegant and comfortable room perfect for couples and small groups',
@@ -20,12 +21,13 @@ export const ROOMS = [
     name: 'Double Deluxe',
     category: 'Deluxe',
     price: 2300,
+    originalPrice: 2800,
     guests: 4,
     available: 3,
     total: 3,
     description: 'Spacious room with 2 Queen Size Beds ideal for families and groups of 4',
     amenities: ['2 Queen Size Beds', 'Sitting Area', 'Modern Bathroom', 'Premium Amenities', 'City View'],
-    image: '/rooms/Double Deluxe/WhatsApp Image 2026-03-21 at 12.57.32.jpeg',
+    image: '/rooms/Double Deluxe/IMG-20251208-WA0016.jpg',
     video: '/rooms/Double Deluxe/WhatsApp Video 2026-03-21 at 12.57.32.mp4',
     images: [
       '/rooms/Double Deluxe/WhatsApp Image 2026-03-21 at 12.57.32.jpeg',
@@ -39,6 +41,7 @@ export const ROOMS = [
     name: 'Room for 10',
     category: 'Family',
     price: 4700,
+    originalPrice: 5500,
     guests: 10,
     available: 1,
     total: 1,
@@ -59,6 +62,7 @@ export const ROOMS = [
     name: 'Room for 16',
     category: 'Family',
     price: 5700,
+    originalPrice: 6500,
     guests: 16,
     available: 1,
     total: 1,
@@ -77,60 +81,25 @@ export const ROOMS = [
   }
 ]
 
-
 // Amenities
 export const AMENITIES = [
-  {
-    icon: 'Wifi',
-    name: 'Free WiFi',
-    description: 'High-speed internet connectivity throughout the hotel'
-  },
-  {
-    icon: 'Clock',
-    name: '24/7 Front Desk',
-    description: 'Round-the-clock assistance for your convenience'
-  },
-  {
-    icon: 'Tv',
-    name: 'Modern Amenities',
-    description: 'Air conditioning, flat-screen TV, and comfortable furnishings'
-  },
-  {
-    icon: 'Coffee',
-    name: 'Hot Beverages',
-    description: 'Complimentary tea and coffee in your room'
-  },
-  {
-    icon: 'Wind',
-    name: 'Clean & Fresh',
-    description: 'Daily housekeeping and well-maintained facilities'
-  },
-  {
-    icon: 'Lock',
-    name: 'Safe & Secure',
-    description: 'Secure facilities with privacy and safety guaranteed'
-  }
+  { icon: 'Wifi', name: 'Free WiFi', description: 'High-speed internet connectivity throughout the hotel' },
+  { icon: 'Clock', name: '24/7 Front Desk', description: 'Round-the-clock assistance for your convenience' },
+  { icon: 'Tv', name: 'Modern Amenities', description: 'Air conditioning, flat-screen TV, and comfortable furnishings' },
+  { icon: 'Coffee', name: 'Hot Beverages', description: 'Complimentary tea and coffee in your room' },
+  { icon: 'Wind', name: 'Clean & Fresh', description: 'Daily housekeeping and well-maintained facilities' },
+  { icon: 'Lock', name: 'Safe & Secure', description: 'Secure facilities with privacy and safety guaranteed' }
 ]
 
-// Room categories for filtering
-export const ROOM_CATEGORIES = [
-  'All',
-  'Deluxe',
-  'Family'
-]
-
-// Price ranges
+export const ROOM_CATEGORIES = ['All', 'Deluxe', 'Family']
 export const PRICE_RANGES = [
   { label: 'Under ₹2000', min: 0, max: 2000 },
   { label: '₹2000 - ₹3500', min: 2000, max: 3500 },
   { label: '₹3500 - ₹5000', min: 3500, max: 5000 },
   { label: '₹5000+', min: 5000, max: Infinity }
 ]
-
-// Guest capacity
 export const GUEST_CAPACITY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16]
 
-// Hotel info
 export const HOTEL_INFO = {
   name: 'Sri Ganesh Residency',
   tagline: 'Comfort & Hospitality',

@@ -1,16 +1,18 @@
 import LayoutWrapper from '../../layout-wrapper'
-import { ROOMS } from '@/lib/constants'
+import { ROOMS as STATIC_ROOMS } from '@/lib/constants'
 import { constructMetadata } from '@/lib/seo/metadata'
 import Breadcrumbs from '@/components/breadcrumb'
 import { Button } from '@/components/ui/button'
-import { Users, Wind, Shield, Coffee, Tv, Info, CheckCircle2, ArrowRight } from 'lucide-react'
+import { Users, Wind, Shield, Coffee, Tv, Info, CheckCircle2, ArrowRight, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import connectDB from '@/lib/mongodb'
+import RoomModel from '@/lib/models/Room'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const room = ROOMS.find((r) => r.slug === slug)
+  const room = STATIC_ROOMS.find((r) => r.slug === slug)
   
   return constructMetadata({
     title: room?.name || 'Room Details',
@@ -19,16 +21,41 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export async function generateStaticParams() {
-  return ROOMS.map((room) => ({
+  return STATIC_ROOMS.map((room) => ({
     slug: room.slug,
   }))
 }
 
 export default async function RoomDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const room = ROOMS.find((r) => r.slug === slug)
   
-  if (!room) notFound()
+  // Find static info for media/description
+  const staticRoom = STATIC_ROOMS.find((r) => r.slug === slug)
+  if (!staticRoom) notFound()
+
+  // Fetch dynamic info (price, availability, capacity) from DB
+  let dynamicRoom = null
+  try {
+    await connectDB()
+    dynamicRoom = await RoomModel.findOne({ id: staticRoom.id }).lean()
+  } catch (err) {
+    console.error('Failed to fetch dynamic room data', err)
+  }
+
+  // Merge static and dynamic data
+  const room = {
+    ...staticRoom,
+    ...(dynamicRoom ? {
+      price: dynamicRoom.price,
+      originalPrice: dynamicRoom.originalPrice,
+      guests: dynamicRoom.capacity,
+      available: dynamicRoom.availableCount,
+      total: dynamicRoom.totalRooms
+    } : {})
+
+  }
+  
+  const isSoldOut = room.available <= 0
 
   return (
     <LayoutWrapper>
@@ -44,16 +71,16 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
           />
           <div className="absolute inset-0 bg-black/60 backdrop-blur-[1.5px]" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-            <div className="mb-10 animate-fade-in [animation-delay:200ms]">
+            <div className="mb-10">
               <div className="px-6 py-2 bg-black/40 backdrop-blur-md rounded-full border border-white/10">
                 <Breadcrumbs items={[{ label: 'Our Rooms', href: '/rooms' }, { label: room.name }]} variant="dark" />
               </div>
             </div>
-            <h1 className="text-6xl md:text-8xl font-serif font-bold text-white mb-6 drop-shadow-2xl animate-fade-in [animation-delay:400ms] leading-none italic">
+            <h1 className="text-6xl md:text-8xl font-serif font-bold text-white mb-6 drop-shadow-2xl leading-none italic">
               {room.name}
             </h1>
-            <div className="w-48 h-1 bg-primary/60 mx-auto mb-8 rounded-full animate-fade-in [animation-delay:500ms]" />
-            <p className="text-xl md:text-3xl text-white max-w-4xl font-light italic animate-fade-in [animation-delay:600ms] leading-relaxed tracking-wide drop-shadow-lg">
+            <div className="w-48 h-1 bg-primary/60 mx-auto mb-8 rounded-full" />
+            <p className="text-xl md:text-3xl text-white max-w-4xl font-light italic leading-relaxed tracking-wide drop-shadow-lg">
               {room.description}
             </p>
           </div>
@@ -65,7 +92,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-24">
             {/* Left Column: Room Details */}
             <div className="lg:col-span-2 space-y-24">
-              <section className="animate-fade-in [animation-delay:800ms]">
+              <section>
                 <div className="flex items-center gap-4 mb-10 group">
                   <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 group-hover:rotate-12">
                     <Info className="w-6 h-6" />
@@ -84,7 +111,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
 
               {/* Video Showcase */}
               {room.video && (
-                <section className="animate-fade-in [animation-delay:850ms]">
+                <section>
                   <h3 className="text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-10">Cinematic Experience</h3>
                   <div className="relative aspect-video rounded-[3rem] overflow-hidden border border-border/40 bg-black group luxury-shadow">
                     <video 
@@ -100,7 +127,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
 
               {/* Real Room Showcase */}
               {room.images && room.images.length > 1 && (
-                <section className="animate-fade-in [animation-delay:900ms]">
+                <section>
                   <h3 className="text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-10">Authentic Visuals</h3>
                   <div className="grid grid-cols-2 gap-6">
                     {room.images.slice(1).map((img, idx) => (
@@ -117,7 +144,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
                 </section>
               )}
 
-              <section className="animate-fade-in [animation-delay:1000ms]">
+              <section>
                 <div className="flex items-center gap-4 mb-10 group">
                   <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 group-hover:-rotate-12">
                     <Shield className="w-6 h-6" />
@@ -138,13 +165,32 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
             </div>
 
             {/* Right Column: Booking Card */}
-            <div className="lg:col-span-1 animate-fade-in [animation-delay:1200ms]">
+            <div className="lg:col-span-1">
               <div className="bg-card border border-border/50 rounded-[3rem] p-12 sticky top-32 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.15)] group">
-                <div className="mb-10 pb-10 border-b border-border/50 text-center">
-                  <p className="text-[10px] font-bold text-foreground/70 uppercase tracking-[0.3em] mb-4">Investment per Night</p>
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="text-6xl font-serif font-bold text-primary group-hover:scale-105 transition-transform duration-700 block">₹{room.price}</span>
-                    <span className="text-sm font-light text-foreground/70 uppercase tracking-widest self-end pb-3">INR</span>
+                <div className="mb-10 pb-10 border-b border-border/50 text-left">
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-baseline gap-4">
+                      <span className="text-6xl font-serif font-bold text-foreground">₹{room.price}</span>
+                      {room.originalPrice && room.originalPrice > room.price && (
+                        <span className="text-2xl text-foreground/30 line-through font-light">
+                          ₹{room.originalPrice}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {room.originalPrice && room.originalPrice > room.price && (
+                      <div className="inline-flex items-center gap-2 py-1.5 px-4 bg-primary/5 border border-primary/10 rounded-full w-fit">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                        <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
+                          HERITAGE SAVINGS: ₹{room.originalPrice - room.price} OFF
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className="flex items-center gap-2 mt-2">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                      <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Status: Limited Availability</span>
+                    </div>
                   </div>
                 </div>
 
@@ -164,15 +210,21 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
                   ))}
                 </div>
 
-                <Button asChild className="w-full luxury-button bg-primary hover:bg-primary/90 text-white h-20 shadow-2xl shadow-primary/30 rounded-[1.5rem] transition-all duration-500 active:scale-95 group">
-                  <Link href={`/booking?roomId=${room.id}`} className="flex items-center justify-center gap-3">
-                    <span className="text-lg">Reserve Sanctum</span>
-                    <ArrowRight className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-2" />
-                  </Link>
+                <Button asChild disabled={isSoldOut} className={`w-full h-20 shadow-2xl rounded-[1.5rem] transition-all duration-500 active:scale-95 group flex items-center justify-center gap-4 ${isSoldOut ? 'bg-muted text-foreground/40 cursor-not-allowed' : 'bg-[#4A1D1D] hover:bg-black text-white shadow-[#4A1D1D]/30'}`}>
+                  {isSoldOut ? (
+                    <span className="text-lg font-bold uppercase tracking-widest">Sold Out</span>
+                  ) : (
+                    <Link href={`/checkout?roomId=${room.id}`} className="flex items-center justify-center gap-3">
+                      <ShoppingBag className="w-6 h-6" />
+                      <span className="text-lg font-bold uppercase tracking-widest">Reserve Sanctum</span>
+                      <ArrowRight className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-2" />
+                    </Link>
+                  )}
                 </Button>
+
                 
                 <p className="text-center text-foreground/60 text-[10px] font-bold uppercase tracking-[0.2em] mt-8">
-                  Commitment-free reservation
+                  {isSoldOut ? 'Join waitlist' : 'Commitment-free reservation'}
                 </p>
               </div>
             </div>

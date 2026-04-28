@@ -61,7 +61,7 @@ export default function Navbar({ dictionary }: NavbarProps) {
             </div>
 
             <Button asChild className="hidden sm:inline-flex luxury-button bg-primary hover:bg-primary/90 text-white px-8 py-4 h-auto text-[10px] rounded-full">
-              <Link href="/booking">{dictionary.common.book_now}</Link>
+              <Link href="/checkout">{dictionary.common.book_now}</Link>
             </Button>
 
             {/* Mobile Menu (Client Component) */}

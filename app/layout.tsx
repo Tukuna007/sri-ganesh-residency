@@ -50,10 +50,8 @@ export default function RootLayout({
         />
         {children}
         <Analytics />
+        <script src="https://checkout.razorpay.com/v1/checkout.js" defer />
       </body>
     </html>
   )
 }
-
-
-

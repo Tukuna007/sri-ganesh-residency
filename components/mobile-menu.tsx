@@ -45,26 +45,25 @@ export default function MobileMenu({ navLinks = [], dictionary }: MobileMenuProp
           <Menu className="w-6 h-6" />
         </button>
       </SheetTrigger>
-      
-      <SheetContent 
-        side="right" 
+
+      <SheetContent
+        side="right"
         className="w-full sm:max-w-md bg-[#1a1512] border-none text-[#f5f1ed] p-0 flex flex-col h-full"
       >
-        <SheetHeader className="p-10 border-b border-white/5">
+        <SheetHeader className="p-8 md:p-10 border-b border-white/5">
           <SheetTitle className="text-left">
-            <Link href="/" className="flex items-center gap-4 group" onClick={() => setIsOpen(false)}>
-              <div className="relative h-[48px] min-w-[48px] flex items-center">
+            <Link href="/" className="flex flex-col sm:flex-row sm:items-center gap-4 group" onClick={() => setIsOpen(false)}>
+              <div className="relative h-[50px] w-[150px]">
                 <Image
                   src="/logo.png"
                   alt={HOTEL_INFO.name}
-                  width={130}
-                  height={48}
-                  className="h-[48px] w-auto object-contain object-left transition-all duration-300 group-hover:scale-105"
+                  fill
+                  className="object-contain object-left transition-all duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-serif font-black text-white tracking-tighter leading-none mb-1 uppercase italic">{HOTEL_INFO.name}</span>
-                <span className="text-[10px] font-black text-primary tracking-[0.4em] uppercase opacity-90 leading-none">{HOTEL_INFO.tagline}</span>
+                <span className="text-lg md:text-xl font-serif font-black text-white tracking-tighter leading-none mb-1 uppercase italic">{HOTEL_INFO.name}</span>
+                <span className="text-[9px] font-black text-primary tracking-[0.4em] uppercase opacity-90 leading-none">{HOTEL_INFO.tagline}</span>
               </div>
             </Link>
           </SheetTitle>
@@ -76,15 +75,15 @@ export default function MobileMenu({ navLinks = [], dictionary }: MobileMenuProp
             <p className="px-4 text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-6">Navigation</p>
             {safeNavLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href))
-              
+
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
                     "flex items-center px-6 min-h-[64px] rounded-2xl text-xl font-serif transition-all duration-300",
-                    isActive 
-                      ? "bg-white/10 text-primary font-bold italic shadow-inner" 
+                    isActive
+                      ? "bg-white/10 text-primary font-bold italic shadow-inner"
                       : "text-white/70 hover:text-white hover:bg-white/5"
                   )}
                   onClick={() => setIsOpen(false)}
@@ -98,14 +97,14 @@ export default function MobileMenu({ navLinks = [], dictionary }: MobileMenuProp
 
           {/* Secondary Information */}
           <div className="space-y-6">
-             <p className="px-4 text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-6">Our Residences</p>
-             <div className="grid grid-cols-1 gap-2">
-                {['Deluxe Suite', 'Double Deluxe', 'Family Sanctuary'].map((room) => (
-                   <div key={room} className="px-10 py-4 text-sm text-white/40 font-light hover:text-white transition-colors cursor-default">
-                      {room}
-                   </div>
-                ))}
-             </div>
+            <p className="px-4 text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-6">Our Residences</p>
+            <div className="grid grid-cols-1 gap-2">
+              {['Deluxe Suite', 'Double Deluxe', 'Family Sanctuary'].map((room) => (
+                <div key={room} className="px-10 py-4 text-sm text-white/40 font-light hover:text-white transition-colors cursor-default">
+                  {room}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

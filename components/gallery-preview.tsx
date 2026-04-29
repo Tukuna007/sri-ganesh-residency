@@ -21,28 +21,28 @@ const GALLERY_ITEMS: GalleryImage[] = [
 
 export default function GalleryPreview() {
   return (
-    <section className="py-40 bg-background relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 md:py-32 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-32 animate-fade-in group">
-          <div className="inline-block py-2 px-6 bg-primary/5 border border-primary/20 rounded-full mb-8 transition-transform group-hover:scale-105 duration-500 gpu-accel">
+        <div className="text-center mb-12 md:mb-24 animate-fade-in group">
+          <div className="inline-block py-2 px-6 bg-primary/5 border border-primary/20 rounded-full mb-6 transition-transform group-hover:scale-105 duration-500 gpu-accel">
             <span className="text-[10px] font-bold text-primary tracking-[0.4em] uppercase">Visual Excellence</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-8xl font-serif font-bold text-foreground mb-8 italic">
+          <h2 className="text-3xl sm:text-4xl md:text-8xl font-serif font-bold text-foreground mb-6 md:mb-8 italic leading-tight">
             The Residency Gallery
           </h2>
-          <div className="w-24 h-1 bg-primary/30 mx-auto mb-10 rounded-full" />
-          <p className="text-xl text-foreground/50 max-w-3xl mx-auto font-light leading-relaxed">
+          <div className="w-24 h-1 bg-primary/30 mx-auto mb-8 rounded-full" />
+          <p className="text-sm md:text-xl text-foreground/50 max-w-3xl mx-auto font-light leading-relaxed">
             Experience the architectural elegance and interior precision of our boutique retreat.
           </p>
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24 px-4 md:px-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-12 md:mb-24">
           {GALLERY_ITEMS.map((item, idx) => (
             <div
               key={item.id}
-              className={`group relative rounded-[2.5rem] overflow-hidden aspect-[1/1.1] cursor-pointer animate-fade-in [animation-delay:calc(idx*100ms)] luxury-shadow hover:luxury-shadow-hover transition-all duration-700 hover:-translate-y-2 gpu-accel ${item.span || ''}`}
+              className={`group relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden aspect-[1/1.1] cursor-pointer animate-fade-in [animation-delay:calc(idx*100ms)] luxury-shadow hover:luxury-shadow-hover transition-all duration-700 hover:-translate-y-2 gpu-accel ${item.span || ''}`}
             >
               <Image
                 src={item.src}
@@ -56,10 +56,10 @@ export default function GalleryPreview() {
               <div className="absolute inset-0 bg-black/10 group-hover:bg-primary/40 transition-colors duration-700 mix-blend-multiply" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
 
-              <div className="absolute inset-0 p-10 flex flex-col justify-end text-white transform transition-all duration-700 group-hover:-translate-y-2">
-                <p className="text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700">{item.category}</p>
-                <h3 className="font-serif text-2xl font-bold leading-tight group-hover:text-white transition-colors duration-300 italic">{item.title}</h3>
-                <div className="w-12 h-0.5 bg-primary/60 mt-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
+              <div className="absolute inset-0 p-6 md:p-10 flex flex-col justify-end text-white transform transition-all duration-700 group-hover:-translate-y-2">
+                <p className="text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-2 md:mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700">{item.category}</p>
+                <h3 className="font-serif text-lg md:text-2xl font-bold leading-tight group-hover:text-white transition-colors duration-300 italic">{item.title}</h3>
+                <div className="w-12 h-0.5 bg-primary/60 mt-3 md:mt-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
               </div>
             </div>
           ))}
@@ -67,9 +67,9 @@ export default function GalleryPreview() {
 
         {/* View Gallery Button */}
         <div className="text-center animate-fade-in [animation-delay:500ms]">
-          <Button asChild className="luxury-button bg-foreground text-background hover:bg-foreground/90 px-12 h-16 rounded-full shadow-2xl">
-            <Link href="/gallery" className="flex items-center gap-3 tracking-[0.2em]">
-              View All <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+          <Button asChild className="luxury-button bg-foreground text-background hover:bg-foreground/90 px-8 md:px-12 h-14 md:h-16 rounded-full shadow-2xl text-[10px] font-bold uppercase tracking-widest">
+            <Link href="/gallery" className="flex items-center gap-3">
+              View All <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
         </div>

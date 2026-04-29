@@ -52,7 +52,7 @@ export default function RoomsContent({ rooms, dictionary }: RoomsContentProps) {
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <div className="relative h-[65vh] flex items-center justify-center overflow-hidden">
+      <div className="relative h-[60vh] md:h-[65vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 scale-105">
           <Image
             src="/rooms/Deluxe/WhatsApp Image 2026-03-21 at 12.57.28.jpeg"
@@ -64,38 +64,38 @@ export default function RoomsContent({ rooms, dictionary }: RoomsContentProps) {
           <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]" />
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center pt-20">
-          <div className="mb-10 animate-fade-in">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-24 md:pt-20">
+          <div className="mb-8 md:mb-10 animate-fade-in">
             <Breadcrumbs items={[{ label: dictionary.common.rooms }]} variant="dark" />
           </div>
-          <h1 className="text-6xl md:text-9xl font-serif font-bold text-white mb-10 leading-[0.9] animate-fade-in italic tracking-tighter drop-shadow-2xl">
+          <h1 className="text-5xl md:text-9xl font-serif font-bold text-white mb-8 md:mb-10 leading-[1.1] md:leading-[0.9] animate-fade-in italic tracking-tighter drop-shadow-2xl">
             {dictionary.common.rooms_title}
           </h1>
-          <p className="text-xl text-white max-w-3xl mx-auto font-light leading-relaxed animate-fade-in">
+          <p className="text-lg md:text-xl text-white max-w-3xl mx-auto font-light leading-relaxed animate-fade-in px-4">
             {dictionary.common.rooms_subtitle}
           </p>
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 py-20 md:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 md:gap-16">
           <div className="lg:col-span-1">
-            <div className="sticky top-32">
+            <div className="lg:sticky lg:top-32">
               <RoomFilter onFilterChange={setFilters} />
             </div>
           </div>
 
           <div className="lg:col-span-3">
             {filteredRooms.length > 0 ? (
-              <div className="space-y-12">
-                <div className="flex items-center justify-between group">
+              <div className="space-y-10 md:space-y-12">
+                <div className="flex flex-col sm:flex-row items-center justify-between group gap-4">
                   <p className="text-[10px] font-bold text-foreground/70 uppercase tracking-[0.3em]">
                     Displaying {filteredRooms.length} of {rooms.length} Exquisite Options
                   </p>
-                  <div className="h-px flex-grow mx-8 bg-border/40" />
+                  <div className="hidden sm:block h-px flex-grow mx-8 bg-border/40" />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                   {filteredRooms.map((room) => (
                     <div key={room.id} className="animate-fade-in">
                       <RoomCard {...room} />
@@ -104,8 +104,8 @@ export default function RoomsContent({ rooms, dictionary }: RoomsContentProps) {
                 </div>
               </div>
             ) : (
-              <div className="text-center py-32 bg-card rounded-[3rem] border border-border/40 luxury-shadow">
-                <p className="text-2xl font-serif text-foreground/80 mb-4 italic">No rooms match your specific criteria.</p>
+              <div className="text-center py-24 md:py-32 bg-card rounded-[2.5rem] md:rounded-[3rem] border border-border/40 luxury-shadow px-6">
+                <p className="text-xl md:text-2xl font-serif text-foreground/80 mb-4 italic">No rooms match your specific criteria.</p>
                 <div className="w-16 h-px bg-primary/30 mx-auto" />
               </div>
             )}

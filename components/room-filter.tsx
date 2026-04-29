@@ -21,7 +21,7 @@ export default function RoomFilter({ onFilterChange }: RoomFilterProps) {
     priceRange: [1000, 6000],
     guests: 0
   })
-  const [isExpanded, setIsExpanded] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleType = (type: string) => {
     const newTypes = filters.type.includes(type)
@@ -52,12 +52,12 @@ export default function RoomFilter({ onFilterChange }: RoomFilterProps) {
   }
 
   return (
-    <div className="bg-card border border-border/50 rounded-[2rem] p-10 sticky top-32 h-fit shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)]">
-      <div className="flex items-center justify-between mb-10">
-        <h3 className="text-2xl font-serif font-bold text-foreground">Filters</h3>
+    <div className="bg-card border border-border/50 rounded-[2rem] p-8 md:p-10 sticky top-32 h-fit shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)]">
+      <div className="flex items-center justify-between mb-8 md:mb-10">
+        <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground">Filters</h3>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="lg:hidden w-8 h-8 flex items-center justify-center rounded-full bg-muted/50 text-foreground"
+          className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-muted/50 text-foreground transition-colors hover:bg-muted"
         >
           <ChevronDown
             className={`w-5 h-5 transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`}
@@ -65,8 +65,7 @@ export default function RoomFilter({ onFilterChange }: RoomFilterProps) {
         </button>
       </div>
 
-      {isExpanded && (
-        <div className="space-y-12">
+      <div className={`${isExpanded ? 'block' : 'hidden lg:block'} space-y-10 md:space-y-12`}>
           {/* Room Type Filter */}
           <div className="animate-fade-in [animation-delay:100ms]">
             <h4 className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] mb-6">Room Type</h4>
@@ -143,8 +142,7 @@ export default function RoomFilter({ onFilterChange }: RoomFilterProps) {
           >
             Clear All Selections
           </button>
-        </div>
-      )}
+      </div>
     </div>
   )
 }

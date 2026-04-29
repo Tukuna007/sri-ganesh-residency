@@ -23,18 +23,17 @@ export default function Navbar({ dictionary }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4 group transition-all active:scale-95 py-2">
-            <div className="relative h-[48px] min-w-[48px] flex items-center">
+          <Link href="/" className="flex items-center gap-3 md:gap-4 group">
+            <div className="relative h-[45px] md:h-[60px] w-[120px] sm:w-[140px] md:w-[180px]">
               <Image
                 src="/logo.png"
                 alt={HOTEL_INFO.name}
-                width={130}
-                height={48}
-                className="h-[48px] w-auto object-contain object-left transition-all duration-500 group-hover:scale-105"
+                fill
+                className="object-contain object-left transition-transform duration-500 group-hover:scale-105"
                 priority
               />
             </div>
-            <div className="flex flex-col">
+            <div className="hidden sm:flex flex-col">
               <span className="font-serif font-black text-xl sm:text-2xl tracking-tighter text-foreground leading-[0.9] mb-1 uppercase italic drop-shadow-sm">{HOTEL_INFO.name}</span>
               <span className="text-[9px] sm:text-[10px] font-black text-primary tracking-[0.4em] uppercase opacity-90 leading-none">{HOTEL_INFO.tagline}</span>
             </div>

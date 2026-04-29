@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { CheckCircle2, Users, Calendar, CreditCard } from 'lucide-react'
-import { ROOMS } from '@/lib/constants'
+import { ROOMS as STATIC_ROOMS } from '@/lib/constants'
 import { formatPrice, type Currency, DEFAULT_CURRENCY } from '@/lib/currency'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import { cn } from '@/lib/utils'
 
 declare global {
   interface Window {
@@ -16,7 +17,7 @@ declare global {
 }
 
 
-export default function BookingContent({ dictionary }: { dictionary: any }) {
+export default function BookingContent({ dictionary, rooms }: { dictionary: any, rooms: any[] }) {
   const searchParams = useSearchParams()
   const [step, setStep] = useState(1)
   const [currency, setCurrency] = useState<Currency>(DEFAULT_CURRENCY)
@@ -52,7 +53,7 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
     return () => window.removeEventListener('currencyChanged', handleCurrencyChange)
   }, [])
 
-  const selectedRoom = ROOMS.find(r => r.id.toString() === bookingData.roomId)
+  const selectedRoom = rooms.find(r => r.id.toString() === bookingData.roomId)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -189,34 +190,34 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
       {/* Header */}
-      <div className="mb-24 text-center animate-fade-in">
-        <div className="inline-block py-2 px-6 bg-primary/5 border border-primary/20 rounded-full mb-8">
-            <span className="text-xs font-bold text-primary tracking-[0.3em] uppercase italic">Reservation</span>
+      <div className="mb-12 md:mb-24 text-center animate-fade-in px-4">
+        <div className="inline-block py-2 px-6 bg-primary/5 border border-primary/20 rounded-full mb-6 md:mb-8">
+            <span className="text-[10px] md:text-xs font-bold text-primary tracking-[0.3em] uppercase italic">Reservation</span>
         </div>
-        <h1 className="text-6xl md:text-8xl font-serif font-bold text-foreground mb-6 leading-tight">
+        <h1 className="text-4xl md:text-8xl font-serif font-bold text-foreground mb-4 md:mb-6 leading-tight">
           {dictionary.common.booking_title}
         </h1>
-        <p className="text-xl text-foreground/50 max-w-2xl mx-auto font-light leading-relaxed">
+        <p className="text-base md:text-xl text-foreground/50 max-w-2xl mx-auto font-light leading-relaxed px-4">
           {dictionary.common.booking_subtitle}
         </p>
       </div>
 
       {/* Progress Indicator */}
-      <div className="flex items-center justify-center gap-4 mb-24 animate-fade-in [animation-delay:200ms]">
+      <div className="flex items-center justify-center gap-2 md:gap-4 mb-12 md:mb-24 animate-fade-in [animation-delay:200ms] px-2">
         {[1, 2, 3, 4].map((s) => (
           <div key={s} className="flex items-center group">
             <div
-              className={`w-14 h-14 rounded-2xl flex items-center justify-center font-serif font-bold transition-all duration-700 shadow-sm ${
+              className={`w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center font-serif font-bold transition-all duration-700 shadow-sm ${
                 s <= step
                   ? 'bg-primary text-white scale-110 rotate-3 shadow-primary/20'
                   : 'bg-muted/50 text-foreground/30 border border-border/50'
               }`}
             >
-              {s < step ? <CheckCircle2 className="w-6 h-6 stroke-[2.5]" /> : <span className="text-lg">0{s}</span>}
+              {s < step ? <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6 stroke-[2.5]" /> : <span className="text-sm md:text-lg">0{s}</span>}
             </div>
             {s < 4 && (
               <div
-                className={`w-8 md:w-16 h-px mx-4 transition-all duration-1000 ${s < step ? 'bg-primary' : 'bg-border/30'}`}
+                className={`w-4 md:w-16 h-px mx-2 md:mx-4 transition-all duration-1000 ${s < step ? 'bg-primary' : 'bg-border/30'}`}
               ></div>
             )}
           </div>
@@ -224,18 +225,18 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
       </div>
 
       {/* Steps */}
-      <div className="bg-card border border-border/50 rounded-[3rem] p-12 md:p-16 shadow-2xl shadow-black/5 relative overflow-hidden animate-fade-in [animation-delay:400ms]">
+      <div className="bg-card border border-border/50 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-2xl shadow-black/5 relative overflow-hidden animate-fade-in [animation-delay:400ms]">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32" />
         
         <div className="relative z-10">
           {/* Step 1: Room & Dates */}
           {step >= 1 && (
             <div className={`transition-all duration-700 ${step === 1 ? 'opacity-100' : 'opacity-40 pointer-events-none mb-12 pb-12 border-b border-border/30'}`}>
-              <div className="flex items-center gap-6 mb-12">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
+              <div className="flex items-center gap-4 md:gap-6 mb-8 md:mb-12">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-primary/10 text-primary flex items-center justify-center text-xs md:text-sm font-bold">
                   {step > 1 ? '✓' : '01'}
                 </div>
-                <h2 className="text-3xl font-serif font-bold text-foreground">Room & Dates</h2>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">Room & Dates</h2>
               </div>
 
               {step === 1 ? (
@@ -296,11 +297,11 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
           {/* Step 2: Guest Information */}
           {step >= 2 && (
             <div className={`transition-all duration-700 ${step === 2 ? 'opacity-100 animate-fade-in' : 'opacity-40 pointer-events-none' + (step > 2 ? ' mb-12 pb-12 border-b border-border/30' : '')}`}>
-              <div className="flex items-center gap-6 mb-12">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
+              <div className="flex items-center gap-4 md:gap-6 mb-8 md:mb-12">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-primary/10 text-primary flex items-center justify-center text-xs md:text-sm font-bold">
                   {step > 2 ? '✓' : '02'}
                 </div>
-                <h2 className="text-3xl font-serif font-bold text-foreground">Guest Information</h2>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">Guest Information</h2>
               </div>
 
               {step === 2 ? (
@@ -367,11 +368,11 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
           {/* Step 3: Payment */}
           {step >= 3 && (
             <div className={`transition-all duration-700 ${step === 3 ? 'opacity-100 animate-fade-in' : 'opacity-40 pointer-events-none'}`}>
-              <div className="flex items-center gap-6 mb-12">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
+              <div className="flex items-center gap-4 md:gap-6 mb-8 md:mb-12">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-primary/10 text-primary flex items-center justify-center text-xs md:text-sm font-bold">
                   {step > 3 ? '✓' : '03'}
                 </div>
-                <h2 className="text-3xl font-serif font-bold text-foreground">Secure Payment</h2>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">Secure Payment</h2>
               </div>
 
               {step === 3 && (
@@ -439,7 +440,7 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
               <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-12 shadow-2xl shadow-primary/40 animate-bounce">
                 <CheckCircle2 className="w-12 h-12 text-white stroke-[2.5]" />
               </div>
-              <h2 className="text-5xl md:text-7xl font-serif font-bold text-foreground mb-8 leading-tight">
+              <h2 className="text-4xl md:text-7xl font-serif font-bold text-foreground mb-6 md:mb-8 leading-tight px-4">
                 Booking <br /><span className="text-primary italic">Refined & Confirmed</span>
               </h2>
               <div className="h-px w-24 bg-primary/20 mx-auto mb-12" />
@@ -456,20 +457,23 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
 
       {/* Navigation Buttons */}
       {step < 4 && (
-        <div className="flex flex-col md:flex-row gap-8 mt-16 items-center justify-between animate-fade-in [animation-delay:600ms]">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 mt-12 md:mt-16 items-center justify-between animate-fade-in [animation-delay:600ms]">
           <button
             onClick={handlePreviousStep}
             disabled={step === 1}
-            className="w-full md:w-auto px-12 h-16 border border-border/50 text-foreground/40 text-[10px] font-bold uppercase tracking-[0.3em] rounded-[1.5rem] hover:bg-black hover:text-white hover:border-black disabled:opacity-0 transition-all duration-700"
+            className={cn(
+              "w-full md:w-auto px-10 md:px-12 h-14 md:h-16 border border-border/50 text-foreground/40 text-[10px] font-bold uppercase tracking-[0.3em] rounded-xl md:rounded-[1.5rem] hover:bg-black hover:text-white hover:border-black transition-all duration-700",
+              step === 1 && "opacity-0 pointer-events-none"
+            )}
           >
             Previous Stage
           </button>
 
-          <div className="flex flex-col md:flex-row items-center gap-12 w-full md:w-auto">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full md:w-auto">
             {selectedRoom && step < 3 && (
-              <div className="text-center md:text-right">
+              <div className="text-center md:text-right w-full md:w-auto bg-muted/20 md:bg-transparent p-4 md:p-0 rounded-2xl md:rounded-none">
                 <h4 className="text-[10px] font-bold text-foreground/30 uppercase tracking-[0.2em] mb-1">Current Selection</h4>
-                <p className="text-lg font-serif font-bold text-foreground italic flex items-center gap-2">
+                <p className="text-base md:text-lg font-serif font-bold text-foreground italic flex items-center justify-center md:justify-end gap-2">
                   {selectedRoom.name} <span className="text-primary">•</span> {formatPrice(selectedRoom.price, currency)} <span className="text-[10px] font-bold text-foreground/20 uppercase">/ night</span>
                 </p>
               </div>
@@ -478,16 +482,16 @@ export default function BookingContent({ dictionary }: { dictionary: any }) {
             {step < 3 ? (
               <button
                 onClick={handleNextStep}
-                className="w-full md:w-auto px-16 h-20 bg-primary hover:bg-black text-white rounded-[1.5rem] font-bold text-xs uppercase tracking-[0.4em] shadow-2xl shadow-primary/20 hover:shadow-black/20 active:scale-[0.98] transition-all duration-700"
+                className="w-full md:w-auto px-12 md:px-16 h-16 md:h-20 bg-primary hover:bg-black text-white rounded-xl md:rounded-[1.5rem] font-bold text-xs uppercase tracking-[0.4em] shadow-2xl shadow-primary/20 hover:shadow-black/20 active:scale-[0.98] transition-all duration-700"
               >
                 Proceed to Security
               </button>
             ) : (
               <button
                 onClick={handleCompleteBooking}
-                className="w-full md:w-auto px-16 h-20 bg-primary hover:bg-black text-white rounded-[1.5rem] font-bold text-xs uppercase tracking-[0.4em] shadow-2xl shadow-primary/20 hover:shadow-black/20 active:scale-[0.98] transition-all duration-700 flex items-center justify-center gap-6"
+                className="w-full md:w-auto px-12 md:px-16 h-16 md:h-20 bg-primary hover:bg-black text-white rounded-xl md:rounded-[1.5rem] font-bold text-xs uppercase tracking-[0.4em] shadow-2xl shadow-primary/20 hover:shadow-black/20 active:scale-[0.98] transition-all duration-700 flex items-center justify-center gap-4 md:gap-6"
               >
-                <CreditCard className="w-6 h-6 stroke-[1.5]" />
+                <CreditCard className="w-5 h-5 md:w-6 md:h-6 stroke-[1.5]" />
                 Authorize Reservation
               </button>
             )}

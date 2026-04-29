@@ -76,49 +76,49 @@ export default function RoomCard({ id, slug, name, category, price, originalPric
       </div>
 
       {/* Content */}
-      <div className="p-8 md:p-10 flex flex-col flex-grow">
-        <div className="flex items-center justify-between mb-4">
+      <div className="p-5 sm:p-6 md:p-10 flex flex-col flex-grow">
+        <div className="flex items-center justify-between mb-2 md:mb-4">
           <span className="text-[10px] font-bold text-primary tracking-[0.3em] uppercase">{category}</span>
           <div className="flex items-center gap-0.5">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-2.5 h-2.5 fill-primary text-primary" />
+              <Star key={i} className="w-2 md:w-2.5 h-2 md:h-2.5 fill-primary text-primary" />
             ))}
           </div>
         </div>
         
-        <h3 className="text-2xl font-serif font-bold text-foreground mb-6 group-hover:text-primary transition-colors duration-300 italic">
+        <h3 className="text-lg md:text-2xl font-serif font-bold text-foreground mb-3 md:mb-6 group-hover:text-primary transition-colors duration-300 italic leading-tight">
           {name}
         </h3>
 
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[10px] font-bold text-muted-foreground mb-8 uppercase tracking-[0.2em]">
-          <div className="flex items-center gap-2">
-            <Users className="w-3.5 h-3.5 text-primary" />
+        <div className="flex flex-wrap items-center gap-x-3 md:gap-x-5 gap-y-2 text-[9px] md:text-[10px] font-bold text-muted-foreground mb-5 md:mb-8 uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <Users className="w-3 md:w-3.5 h-3 md:h-3.5 text-primary" />
             <span>{guests} Guests</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Wind className="w-3.5 h-3.5 text-primary" />
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <Wind className="w-3 md:w-3.5 h-3 md:h-3.5 text-primary" />
             <span>A/C Room</span>
           </div>
         </div>
 
-        {/* Pricing Section - EXACTLY AS REQUESTED */}
-        <div className="mt-auto space-y-4">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-baseline gap-3">
-              <span className="text-4xl font-serif font-bold text-foreground">
+        {/* Pricing Section */}
+        <div className="mt-auto space-y-4 md:space-y-6">
+          <div className="flex flex-col gap-1 md:gap-2">
+            <div className="flex items-baseline gap-2 md:gap-3">
+              <span className="text-2xl md:text-4xl font-serif font-bold text-foreground">
                 {formatPrice(price, currency)}
               </span>
               {hasDiscount && (
-                <span className="text-xl text-foreground/30 line-through font-light">
+                <span className="text-base md:text-xl text-foreground/30 line-through font-light">
                   {formatPrice(originalPrice!, currency)}
                 </span>
               )}
             </div>
             
             {hasDiscount && (
-              <div className="inline-flex items-center gap-2 py-1 px-3 bg-primary/5 border border-primary/10 rounded-full w-fit">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 py-0.5 md:py-1 px-2.5 md:px-3 bg-primary/5 border border-primary/10 rounded-full w-fit">
+                <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-primary rounded-full animate-pulse" />
+                <span className="text-[9px] md:text-[10px] font-bold text-primary uppercase tracking-widest">
                   SAVINGS: {formatPrice(savings, currency)} OFF
                 </span>
               </div>
@@ -126,14 +126,14 @@ export default function RoomCard({ id, slug, name, category, price, originalPric
           </div>
 
           <Button asChild disabled={isSoldOut} className={cn(
-            "w-full h-14 rounded-xl border-none shadow-xl transition-all duration-500 font-bold uppercase tracking-widest text-[10px]",
-            isSoldOut ? "bg-muted text-foreground/30 cursor-not-allowed" : "bg-[#4A1D1D] text-white hover:bg-black shadow-[#4A1D1D]/20"
+            "w-full h-12 md:h-16 rounded-xl md:rounded-2xl border-none shadow-xl transition-all duration-500 font-bold uppercase tracking-widest text-[9px] md:text-[10px]",
+            isSoldOut ? "bg-muted text-foreground/30 cursor-not-allowed" : "bg-[#4A1D1D] text-white hover:bg-black shadow-[#4A1D1D]/20 active:scale-[0.98]"
           )}>
             <Link href={isSoldOut ? "#" : `/rooms/${slug}`}>
-              <div className="flex items-center justify-center gap-3">
+              <div className="flex items-center justify-center gap-2 md:gap-3">
                 {isSoldOut ? "Fully Booked" : (
                   <>
-                    <ShoppingBag className="w-4 h-4" />
+                    <ShoppingBag className="w-3.5 md:w-4 h-3.5 md:h-4" />
                     Reserve Now
                   </>
                 )}

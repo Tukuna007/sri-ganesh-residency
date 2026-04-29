@@ -285,12 +285,12 @@ export default function CheckoutContent() {
   )
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-      <div className="text-center mb-20">
-        <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground mb-4 italic">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <div className="text-center mb-12 md:mb-20">
+        <h1 className="text-3xl md:text-6xl font-serif font-bold text-foreground mb-4 italic leading-tight">
           {activeStep === 4 ? 'Booking Successful!' : 'Secure Your Reservation'}
         </h1>
-        <p className="text-foreground/50 font-light max-w-2xl mx-auto italic">
+        <p className="text-sm md:text-base text-foreground/50 font-light max-w-2xl mx-auto italic px-4">
           {activeStep === 4 ? 'Thank you for choosing Sri Ganesh Residency. Your sanctuary awaits.' : 'Experience the hospitality of Tirupati in just a few steps.'}
         </p>
       </div>
@@ -298,13 +298,13 @@ export default function CheckoutContent() {
       <StepIndicator />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <div className={cn("space-y-12", activeStep === 4 ? "lg:col-span-12" : "lg:col-span-8")}>
+        <div className={cn("space-y-10 md:space-y-12", activeStep === 4 ? "lg:col-span-12" : "lg:col-span-8")}>
           
           {/* Step 1: Guest Information */}
           {activeStep === 1 && (
-            <div className="bg-card border border-border/50 rounded-[3rem] p-10 md:p-16 shadow-2xl shadow-black/5 animate-fade-in">
-              <h3 className="text-3xl font-serif font-bold text-foreground mb-12 flex items-center gap-5">
-                <div className="w-1.5 h-10 bg-primary/30 rounded-full" />
+            <div className="bg-card border border-border/50 rounded-[2.5rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 shadow-2xl shadow-black/5 animate-fade-in">
+              <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-8 md:mb-12 flex items-center gap-4 md:gap-5">
+                <div className="w-1 md:w-1.5 h-8 md:h-10 bg-primary/30 rounded-full" />
                 Who's Staying With Us?
               </h3>
               
@@ -338,9 +338,9 @@ export default function CheckoutContent() {
 
           {/* Step 2: Stay Configuration */}
           {activeStep === 2 && (
-            <div className="bg-card border border-border/50 rounded-[3rem] p-10 md:p-16 shadow-2xl shadow-black/5 animate-fade-in">
-              <h3 className="text-3xl font-serif font-bold text-foreground mb-12 flex items-center gap-5">
-                <div className="w-1.5 h-10 bg-primary/30 rounded-full" />
+            <div className="bg-card border border-border/50 rounded-[2.5rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 shadow-2xl shadow-black/5 animate-fade-in">
+              <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-8 md:mb-12 flex items-center gap-4 md:gap-5">
+                <div className="w-1 md:w-1.5 h-8 md:h-10 bg-primary/30 rounded-full" />
                 Stay Details
               </h3>
               <div className="space-y-12">
@@ -362,9 +362,9 @@ export default function CheckoutContent() {
 
           {/* Step 3: Payment & Review */}
           {activeStep === 3 && (
-            <div className="bg-card border border-border/50 rounded-[3rem] p-10 md:p-16 shadow-2xl shadow-black/5 animate-fade-in space-y-12">
-              <h3 className="text-3xl font-serif font-bold text-foreground flex items-center gap-5">
-                <div className="w-1.5 h-10 bg-primary/30 rounded-full" />
+            <div className="bg-card border border-border/50 rounded-[2.5rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 shadow-2xl shadow-black/5 animate-fade-in space-y-10 md:space-y-12">
+              <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground flex items-center gap-4 md:gap-5">
+                <div className="w-1 md:w-1.5 h-8 md:h-10 bg-primary/30 rounded-full" />
                 Secure Payment
               </h3>
 
@@ -461,7 +461,7 @@ export default function CheckoutContent() {
         {/* Sidebar Summary */}
         {activeStep < 4 && (
           <div className="lg:col-span-4 animate-fade-in [animation-delay:200ms]">
-            <div className="bg-card border border-border/50 rounded-[3rem] p-10 shadow-2xl shadow-black/5 sticky top-32">
+            <div className="bg-card border border-border/50 rounded-[2.5rem] md:rounded-[3rem] p-6 sm:p-10 shadow-2xl shadow-black/5 sticky top-32">
               <div className="relative aspect-video rounded-2xl overflow-hidden mb-10 border border-border/40">
                 <Image src={selectedRoom.image} alt={selectedRoom.name} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
